@@ -361,9 +361,9 @@ INSERT [dbo].[ProductoFinanciero] ([ProductoFinancieroID], [TipoProductoID], [En
 GO
 SET IDENTITY_INSERT [dbo].[Prospecto] ON 
 GO
-INSERT [dbo].[Prospecto] ([ProspectoID], [Nombres], [Apellidos], [TipoDocumentoID], [NumeroDocumento], [Email], [NumeroCelular], [DepartamentoID], [FechaRegistro], [Activo]) VALUES (1, N'Diego', N'Mendoza', 1, N'76739277', N'diego.mendoza@materiagris.pe', N'987654321', 1, CAST(N'2021-05-29T00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[Prospecto] ([Nombres], [Apellidos], [TipoDocumentoID], [NumeroDocumento], [Email], [NumeroCelular], [DepartamentoID], [FechaRegistro], [Activo]) VALUES (N'Diego', N'Mendoza', 1, N'76739277', N'diego.mendoza@materiagris.pe', N'987654321', 1, CAST(N'2021-05-29T00:00:00.000' AS DateTime), 1)
 GO
-INSERT [dbo].[Prospecto] ([ProspectoID], [Nombres], [Apellidos], [TipoDocumentoID], [NumeroDocumento], [Email], [NumeroCelular], [DepartamentoID], [FechaRegistro], [Activo]) VALUES (2, N'Diego', N'Villarreyes', 2, N'98765432111', N'diego.mendoza@test.com', N'987654321', 3, CAST(N'2021-05-29T00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[Prospecto] ([Nombres], [Apellidos], [TipoDocumentoID], [NumeroDocumento], [Email], [NumeroCelular], [DepartamentoID], [FechaRegistro], [Activo]) VALUES (N'Diego', N'Villarreyes', 2, N'98765432111', N'diego.mendoza@test.com', N'987654321', 3, CAST(N'2021-05-29T00:00:00.000' AS DateTime), 1)
 GO
 SET IDENTITY_INSERT [dbo].[Prospecto] OFF
 GO
