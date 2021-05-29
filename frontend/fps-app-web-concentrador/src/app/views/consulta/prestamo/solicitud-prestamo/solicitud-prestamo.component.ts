@@ -5,6 +5,8 @@ import { SelectItem } from 'primeng/api';
 import { Prospecto } from '../../../../models/prospecto';
 import { ProspectoService } from '../../../../services/prospecto.service';
 import Swal from 'sweetalert2';
+import { DepartamentoService } from 'src/app/services/departamento.service';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-solicitud-prestamo',
@@ -17,10 +19,12 @@ export class SolicitudPrestamoComponent implements OnInit {
   id: number;
 
   constructor(private readonly prospectoService: ProspectoService,
+              private readonly departamentoService: DepartamentoService,
               private readonly fb: FormBuilder,
               private readonly router: Router) { }
 
-  departamento: SelectItem[];
+  //departamento: SelectItem[];
+  departamentos: SelectItem[];
   tipoDocumento: SelectItem[];
 
   ngOnInit(): void {
@@ -31,37 +35,65 @@ export class SolicitudPrestamoComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      nombre: [''],
-      apellido: [''],
-      tipoDocumentoId: [],
-      numeroDocumento: [''],
-      email: [''],
-      celular: [''],
-      departamentoId: []
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      idTipoDocumento: [null, Validators.required],
+      numeroDocumento: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.email]],
+      celular: ['', [Validators.required,  Validators.minLength(7), Validators.maxLength(20)]],
+      idDepartamento: [null, Validators.required]
     });
   }
 
+  get nombre() {
+    return this.form.get('nombre');
+  }
+  get apellido() {
+    return this.form.get('apellido');
+  }
+  get idTipoDocumento() {
+    return this.form.get('idTipoDocumento');
+  }
+  get numeroDocumento() {
+    return this.form.get('numeroDocumento');
+  }
+  get email() {
+    return this.form.get('email');
+  }
+  get celular() {
+    return this.form.get('celular');
+  }
+  get idDepartamento() {
+    return this.form.get('idDepartamento');
+  }
 
   guardar() {
-    const data = new Prospecto();
-    data.nombres = this.form.value.nombre;
-    data.apellidos = this.form.value.apellido;
-    data.tipoDocumentoId = this.form.value.tipoDocumentoId;
-    data.departamentoId = this.form.value.departamentoId;
-    data.email = this.form.value.email;
-    data.numeroDocumento = this.form.value.numeroDocumento;
-    data.numeroCelular =  this.form.value.celular;
-    this.prospectoService.save(data).subscribe( () => {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Su informacion fue enviada',
-        text: 'Por favor espere a que le contactemos, gracias.',
-        showConfirmButton: true
-      }).then((result) => {
-        this.router.navigate(['/home']);
+    if(this.form.valid)
+      {
+      const data = new Prospecto();
+      data.nombres = this.form.value.nombre;
+      data.apellidos = this.form.value.apellido;
+      data.tipoDocumentoId = this.form.value.idTipoDocumento;
+      data.departamentoId = this.form.value.idDepartamento;
+      data.email = this.form.value.email;
+      data.numeroDocumento = this.form.value.numeroDocumento;
+      data.numeroCelular =  this.form.value.celular;
+      this.prospectoService.save(data).subscribe( () => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Su informacion fue enviada',
+          text: 'Por favor espere a que le contactemos, gracias.',
+          showConfirmButton: true
+        }).then((result) => {
+          this.router.navigate(['/home']);
+        });
       });
-    });
+    }
+    else{
+      Swal.fire("Por favor llene los campos correctamente.");
+      return;
+    }
   }
 
   loadDocumento(){
@@ -73,6 +105,14 @@ export class SolicitudPrestamoComponent implements OnInit {
   }
 
   loadDepartamento(){
+    this.departamentoService.listar().subscribe(data => {
+      this.departamentos = [
+        { label: 'Seleccione..', value: null }
+      ];
+      //this.departamentos = data;
+      this.departamentos = this.departamentos.concat(data);
+    });
+    /*
     this.departamento = [
       {label: 'Seleccione..', value: null},
       {label: 'Amazonas', value: 1},
@@ -94,5 +134,6 @@ export class SolicitudPrestamoComponent implements OnInit {
       {label: 'Piura', value: 17},
       {label: 'Tacna', value: 18}
   ];
+  */
   }
 }

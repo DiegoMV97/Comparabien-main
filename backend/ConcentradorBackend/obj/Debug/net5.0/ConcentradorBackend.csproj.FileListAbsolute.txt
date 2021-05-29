@@ -58,4 +58,3 @@ C:\Angular Net Core\Comparabien-main\Comparabien-main\backend\ConcentradorBacken
 C:\Angular Net Core\Comparabien-main\Comparabien-main\backend\ConcentradorBackend\obj\Debug\net5.0\ref\ConcentradorBackend.dll
 C:\Angular Net Core\Comparabien-main\Comparabien-main\backend\ConcentradorBackend\obj\Debug\net5.0\ConcentradorBackend.pdb
 C:\Angular Net Core\Comparabien-main\Comparabien-main\backend\ConcentradorBackend\obj\Debug\net5.0\ConcentradorBackend.genruntimeconfig.cache
-C:\Angular Net Core\Comparabien-main\Comparabien-main\backend\ConcentradorBackend\obj\Debug\net5.0\ConcentradorBackend.csprojAssemblyReference.cache

@@ -13,6 +13,7 @@ export class ProspectoService {
   constructor(protected http: HttpClient) { }
   
   save(entidad: Prospecto){
+    debugger;
     return this.http.post(`${this.endpoint}`, JSON.stringify(entidad), httpHeaders);
   }
 

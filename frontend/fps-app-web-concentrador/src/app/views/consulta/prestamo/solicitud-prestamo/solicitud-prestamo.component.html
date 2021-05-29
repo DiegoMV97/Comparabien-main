@@ -9,38 +9,62 @@
                     <div class="p-col-10 p-sm-6 p-md-6 p-lg-6">
                         <p class="textos">Nombres: </p>
                         <input type="text" pInputText class="entrada" formControlName="nombre" />
+                        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger text-danger">
+                            <div *ngIf="nombre.errors?.required" class="text-danger">Nombres requeridos</div>
+                        </div>
                     </div>
                     <div class="p-col-10 p-sm-6 p-md-6 p-lg-6">
                         <p class="textos">Apellidos: </p>
                         <input type="text" pInputText class="entrada" formControlName="apellido" />
+                        <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="alert alert-danger text-danger">
+                            <div *ngIf="apellido.errors?.required" class="text-danger">Apellidos requeridos</div>
+                        </div>
                     </div>
                 </div>
                 <div class="p-grid p-justify-center">
                     <div class="p-col-10 p-sm-6 p-md-6 p-lg-6">
                         <p class="textos">Tipo Documento: </p>
-                        <p-dropdown autoWidth="false" [style]="{'width':'100%'}" [options]="tipoDocumento"
-                            formControlName="tipoDocumentoId"></p-dropdown>
+                        <p-dropdown autoWidth="false" [style]="{'width':'100%'}" [options]="tipoDocumento" formControlName="idTipoDocumento"></p-dropdown>
+                        <div *ngIf="idTipoDocumento.invalid && (idTipoDocumento.dirty || idTipoDocumento.touched)" class="alert alert-danger text-danger">
+                            <div *ngIf="idTipoDocumento.errors?.required" class="text-danger">Tipo de documento requerido</div>
+                        </div>
                     </div>
                     <div class="p-col-10 p-sm-6 p-md-6 p-lg-6">
                         <p class="textos">Numero Documento: </p>
                         <input type="text" pInputText class="entrada" formControlName="numeroDocumento" />
+                        <div *ngIf="numeroDocumento.invalid && (numeroDocumento.dirty || numeroDocumento.touched)" class="alert alert-danger text-danger">
+                            <div *ngIf="numeroDocumento.errors?.required" class="text-danger">Número de documento requerido</div>
+                            <div *ngIf="numeroDocumento.errors?.minlength?.requiredLength > numeroDocumento.value.length" class="text-danger">La cantidad mínima de caracteres es 8</div>
+                            <div *ngIf="numeroDocumento.errors?.maxlength?.requiredLength < numeroDocumento.value.length" class="text-danger">La cantidad máxima de caracteres es 20</div>
+                        </div>
                     </div>
                 </div>
                 <div class="p-grid p-justify-center">
                     <div class="p-col-10 p-sm-6 p-md-6 p-lg-6">
                         <p class="textos">Email: </p>
                         <input type="text" pInputText class="entrada" formControlName="email" />
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger text-danger">
+                            <div *ngIf="email.errors?.required" class="text-danger">Email requerido</div>
+                            <div *ngIf="email.errors?.email" class="text-danger">Email con formato incorrecto</div>
+                        </div>
                     </div>
                     <div class="p-col-10 p-sm-6 p-md-6 p-lg-6">
                         <p class="textos">Celular: </p>
                         <input type="text" pInputText class="entrada" formControlName="celular" />
+                        <div *ngIf="celular.invalid && (celular.dirty || celular.touched)" class="alert alert-danger text-danger">
+                            <div *ngIf="celular.errors?.required" class="text-danger">Celular requerido</div>
+                            <div *ngIf="celular.errors?.minlength?.requiredLength > celular.value.length" class="text-danger">La cantidad mínima de caracteres es 7</div>
+                            <div *ngIf="celular.errors?.maxlength?.requiredLength < celular.value.length" class="text-danger">La cantidad máxima de caracteres es 20</div>
+                        </div>
                     </div>
                 </div>
                 <div class="p-grid p-justify-center">
                     <div class="p-col-10 p-sm-6 p-md-6 p-lg-6">
                         <p class="textos">Departamento: </p>
-                        <p-dropdown autoWidth="false" [style]="{'width':'100%'}" [options]="departamento"
-                            formControlName="departamentoId"></p-dropdown>
+                        <p-dropdown autoWidth="false" [style]="{'width':'100%'}" [options]="departamentos" formControlName="idDepartamento"></p-dropdown>
+                        <div *ngIf="idDepartamento.invalid && (idDepartamento.dirty || idDepartamento.touched)" class="alert alert-danger text-danger">
+                            <div *ngIf="idDepartamento.errors?.required" class="text-danger">Departamento requerido</div>
+                        </div>
                     </div>
                     <div class="p-col-10 p-sm-6 p-md-6 p-lg-6">
                         <p class="textos">Comentario: </p>
@@ -51,8 +75,7 @@
                 <div class="p-grid p-justify-center">
                     <div class="p-col-10 p-sm-6 p-md-6 p-lg-6">
                         <div class="p-grid p-justify-center">
-                            <button pButton type="submit" label="Solicitar"
-                                class="p-button-raised p-button-danger p-button-rounded buton-compara"></button>
+                            <button pButton type="submit" label="Solicitar" class="p-button-raised p-button-danger p-button-rounded buton-compara"></button>
                         </div>
                     </div>
                 </div>
@@ -60,8 +83,7 @@
                 <div class="p-grid p-justify-center">
                     <div class="p-col-10 p-sm-6 p-md-4 p-lg-4">
                         <div class="p-grid p-justify-center">
-                            <button pButton pRipple type="button" icon="pi pi pi-arrow-left" label="Volver"
-                                class="p-button-rounded p-button-warning" routerLink="/prestamo/result"></button>
+                            <button pButton pRipple type="button" icon="pi pi pi-arrow-left" label="Volver" class="p-button-rounded p-button-warning" routerLink="/prestamo/result"></button>
                         </div>
                     </div>
                 </div>
